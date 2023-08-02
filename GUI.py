@@ -1,5 +1,14 @@
 import pygame as p
 import tkinter as tk
+def choice_window():
+    first_window=tk.Tk()
+    first_window.geometry("800x300")
+    Choice_label=tk.Label(first_window,text="How many Queens do you want to demonstrate sensei? ")
+    Choice_label.config(font=("Arial",20),fg="Green",bg="blacK") # the named parameters fg and bg are case insensitive and they convert to lower in the implementation
+    Choice_label.pack()
+    first_window.title("This is the first window")
+    first_window.config(bg="Black")
+    first_window.mainloop()
 def draw_4_queens():
     for rows in range(0, 4):
         for columns in range(0, 4):
@@ -11,7 +20,7 @@ def draw_4_queens():
             else:
                 p.draw.rect(window, white, (pos_x, pos_y, square_size, square_size))
 if(__name__=="__main__"):
-
+    choice_window()
     window_dimensions=[800,800]
     p.init() # when we call this function we essentially call the lower level p.display.init() function
     flags=p.RESIZABLE|p.HWSURFACE|p.DOUBLEBUF
