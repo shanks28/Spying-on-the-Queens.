@@ -7,7 +7,7 @@ def choice_window():
     global choice_4_queens_button
     start_window=tk.Tk()
     start_window.geometry("800x300")
-    Choice_label=tk.Label(start_window,text="How many Queens do you want to demonstrate sensei? ")
+    Choice_label=tk.Label(start_window,text="How many Queens do you want to demonstrate,sensei? ")
     Choice_label.config(font=("Arial",20),fg="Green",bg="blacK") # the named parameters fg and bg are case insensitive and they convert to lower in the implementation
     Choice_label.pack()
     start_window.title("This is the first window")
@@ -17,13 +17,12 @@ def choice_window():
     choice_4_queens_button.pack(pady=50)
     start_window.mainloop()
 def draw_4_queens(window,square_size):
-    global black,white
     for rows in range(0, 4):
         for columns in range(0, 4):
             pos_x = (rows * square_size)
             pos_y = (columns * square_size)
 
-            if ((rows + columns) % 2):
+            if ((rows + columns) % 2): # we could also replace this with an inline if statement but that would then require a mandatory else statement.
                 p.draw.rect(window, black, (pos_x, pos_y, square_size, square_size))
             else:
                 p.draw.rect(window, white, (pos_x, pos_y, square_size, square_size))
@@ -51,3 +50,5 @@ def draw_pygame_window():
     choice_4_queens_button['state']='normal'
 if(__name__=="__main__"):
     choice_window()
+
+    # moores law....the number of transistors that are packed into a single chip double every 2 years
