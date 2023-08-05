@@ -50,8 +50,13 @@ def draw_pygame_window():
     rows = [1, 2, 3, 4]
     columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     square_size = (window_dimensions[0] / 4)-5
-
-    pos_x, pos_y = (0, 0)
+    def place_queen(row,column):
+        image=p.image.load("Queen.png")
+        image=p.transform.scale(image,(square_size-15,square_size-15)) # this takes image object,width,length of the object
+        x=row*square_size
+        y=column*square_size
+        window.blit(image,(x,y)) # this method is acted on the surface object and takes the image to put on the surface followed by the position of the image
+    # pos_x, pos_y = (0, 0)
     clock = p.time.Clock()
     running = True
     while (running): # this is also called as the game loop
@@ -61,6 +66,7 @@ def draw_pygame_window():
         #window.fill(white)
         draw_4_queens(window, square_size)
         draw_label_for_board(window_dimensions, square_size)
+        place_queen(3,0) # this accepts the row,column in the conventional array representation
         p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
     p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
     choice_4_queens_button['state']='normal'
