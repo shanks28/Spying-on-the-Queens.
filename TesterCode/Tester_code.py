@@ -11,7 +11,9 @@ white=(255,255,255)# this stores the color as an RGB tuple
 black=(0,0,0)
 def place_object(row,column):
     queen_image=pygame.image.load("D:/Spying_on_The_Queens/Queen.png")
-    queen_image=pygame.transform.scale(queen_image,(square_size,square_size))
+    queen_image=pygame.transform.scale(queen_image,(square_size,square_size-15))
+    queen_image=queen_image.convert_alpha()
+    queen_image.set_colorkey(white)
     pos_x=column*square_size
     pos_y=row*square_size
     window.blit(queen_image,(pos_x,pos_y))
