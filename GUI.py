@@ -4,7 +4,7 @@ import pygame as p
 window=0
 black = (0, 0, 0)
 white = (255, 255, 255)
-blue=(255,0,0)
+blue=(255,0,0) # this is of the form RGB in that order
 choice_4_queens_button=None
 def choice_window():
     global choice_4_queens_button
@@ -32,11 +32,13 @@ def draw_4_queens(window,square_size):
 
 def draw_label_for_board(window_dimensions,square_size):
     global window
-    for index,element in enumerate([1,2,3,4][::-1]):
+    for index,element in enumerate([1,2,3,4][::-1]): # For ROWS
         font = p.font.Font(None, 40)
         row_number_text=font.render(str(element),True,blue) # this function takes the string to be rendered , a boolean asking ifyou want antialiasing and athe color of the string that is to be rendered
-        window.blit(row_number_text,(window_dimensions[0]-square_size,index*square_size+square_size//2))
-
+        window.blit(row_number_text,(window_dimensions[0]-20,index*square_size+square_size//2)) # this takes....source,(x,y) as parameters
+    for index,element in enumerate(['A','B','C','D']):
+        column_Alphabet_text=font.render(element,True,blue)
+        window.blit(column_Alphabet_text,(index*square_size+square_size//2,window_dimensions[1]-20))
 def draw_pygame_window():
     global window
     choice_4_queens_button.config(state=tk.DISABLED)
@@ -59,7 +61,7 @@ def draw_pygame_window():
         window.fill(white)
         draw_4_queens(window, square_size)
         draw_label_for_board(window_dimensions, square_size)
-        p.display.flip()
+        p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
     p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
     choice_4_queens_button['state']='normal'
 if(__name__=="__main__"):
