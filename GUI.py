@@ -58,7 +58,7 @@ def draw_pygame_window():
         for event in p.event.get():
             if (event.type == p.QUIT):
                 running = False
-        window.fill(white)
+        #window.fill(white)
         draw_4_queens(window, square_size)
         draw_label_for_board(window_dimensions, square_size)
         p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
