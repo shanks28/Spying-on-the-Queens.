@@ -35,5 +35,6 @@ while running:
     # clock.tick(60) # this is to limit the number of frames that get displayed on the screen persec
     for_8_queens()
     place_object(4,5)
+    # pygame.display.update()
     pygame.display.flip()
 pygame.quit()

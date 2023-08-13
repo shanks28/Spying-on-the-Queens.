@@ -66,7 +66,7 @@ def draw_pygame_window():
         #window.fill(white)
         draw_4_queens(window, square_size)
         draw_label_for_board(window_dimensions, square_size)
-        place_queen(3,0) # this accepts the row,column in the conventional array representation
+        place_queen(1,0) # this accepts the row,column in the conventional array representation
         p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
     p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
     choice_4_queens_button['state']='normal'
