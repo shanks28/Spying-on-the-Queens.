@@ -1,0 +1,13 @@
+Each fundamental solution acts as a starting point for generating other solutions through rotations and reflections.
+The solutions have rotational symmetry of 4 ....this means that the arrangement of the queens on the chess board looks the same after being rotated by 90,180,270
+This can be solved using Brute Force which is exhaustively searching through the possibilities to place the queens on the chess board so that they adhere to the constraints of the
+problem.
+Backtracking is another method to solve this problem
+There are over 4 bn possible combinations that can be placed on the board but only 92 possible solutions to this problem
+
+
+ by applying a simple rule that chooses one queen from each column,We can bring down the permutations to 16 mn
+ Backtracking is a type of recursion because we try to find the solution to the same problem at each state
+ Backtracking at every step eliminates those possibilities that cannot be used to solve the problem and then proceeds to those that have to possibility to solve the
+ problem at some point in the future.
+ The backtracking method can be thought of as a tree that has many different possibilities that branch out of each state
