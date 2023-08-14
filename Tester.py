@@ -54,6 +54,7 @@ def draw_pygame_window(window):
     p.init()  # when we call this function we essentially call the lower level p.display.init() function
     flags = p.RESIZABLE | p.HWSURFACE | p.DOUBLEBUF
     window = p.display.set_mode((window_dimensions[0], window_dimensions[1]), flags)
+    window_var=window
     rows = [1, 2, 3, 4]
     columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     square_size = (window_dimensions[0] / 4)-5
@@ -69,7 +70,7 @@ def draw_pygame_window(window):
         draw_label_for_board(window_dimensions, square_size,window)
         #place_queen(2,2,window)
         #Logic.place_queens_dynamically(2,2,window) # this accepts the row,column in the conventional array representation
-        Logic.main(window)
+        Logic.main(window_var)
         p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
     p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
     choice_4_queens_button['state']='normal'
