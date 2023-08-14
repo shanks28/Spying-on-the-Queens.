@@ -1,38 +1,79 @@
-import pygame
-pygame.init()
-window_dimensions=[800,800]
-flags=pygame.RESIZABLE|pygame.HWSURFACE|pygame.DOUBLEBUF
-window=pygame.display.set_mode((window_dimensions[0],window_dimensions[1]),flags)
-clock=pygame.time.Clock()
-running=True
-chessboard_size_8_queens=4
-square_size=window_dimensions[0]/chessboard_size_8_queens
-white=(255,255,255)# this stores the color as an RGB tuple
-black=(0,0,0)
-def for_8_queens():
-    for row in range(chessboard_size_8_queens):
-        for col in range(chessboard_size_8_queens):
-            y=row*square_size
-            x=col*square_size
-            if((row+col)%2==0):
-                color=white
+import tkinter as tk
+import Logic
+window_var=0
+import pygame as p
+black = (0, 0, 0)
+white = (255, 255, 255)
+blue=(255,0,0) # this is of the form RGB in that order
+choice_4_queens_button=None
+window_dimensions = [820, 820]
+def choice_window(window):
+    global choice_4_queens_button
+    global window_var
+    start_window=tk.Tk()
+    start_window.geometry("800x300")
+    Choice_label=tk.Label(start_window,text="How many Queens do you want to demonstrate,sensei? ")
+    Choice_label.config(font=("Arial",20),fg="Green",bg="blacK") # the named parameters fg and bg are case insensitive and they convert to lower in the implementation
+    Choice_label.pack()
+    start_window.title("This is the first window")
+    start_window.config(bg="Black")
+    choice_4_queens_button=tk.Button(start_window,text="4 Queens",command=lambda : draw_pygame_window(window))
+    choice_4_queens_button.config(fg="cyan",bg="black",font=("arial",15))
+    choice_4_queens_button.pack(pady=50)
+    start_window.mainloop()
+def draw_4_queens(window,square_size):
+    for rows in range(0, 4):
+        for columns in range(0, 4):
+            pos_x = (rows * square_size)
+            pos_y = (columns * square_size)
+
+            if ((rows + columns) % 2): # we could also replace this with an inline if statement but that would then require a mandatory else statement.
+                p.draw.rect(window, black, (pos_x, pos_y, square_size, square_size))
             else:
-                color=black
-            pygame.draw.rect(window,color,(x,y,square_size,square_size))
-while running:
-    for events in pygame.event.get():
-        if events.type==pygame.QUIT:
-            running=False
-    window.fill(white)
-    # clock.tick(60) # this is to limit the number of frames that get displayed on the screen persec
-    for_8_queens()
-    pygame.display.flip()
-pygame.quit()
-def absolute_difference(list1,list2):
-    index=0
-    if(index not in list1 and item not in list2):
-        return
-    return abs(list1[++index]-list2[++index])
-list1=[1,2,3,4]
-list2=[1,2,3,4]
-res=absolute_difference(list1,list2)
+                p.draw.rect(window, white, (pos_x, pos_y, square_size, square_size))
+
+def draw_label_for_board(window_dimensions,square_size,window):
+    for index,element in enumerate([1,2,3,4][::-1]): # For ROWS
+        font = p.font.Font(None, 40)
+        row_number_text=font.render(str(element),True,blue) # this function takes the string to be rendered , a boolean asking ifyou want antialiasing and athe color of the string that is to be rendered
+        window.blit(row_number_text,(window_dimensions[0]-20,index*square_size+square_size//2)) # this takes....source,(x,y) as parameters
+    for index,element in enumerate(['A','B','C','D']):
+        column_Alphabet_text=font.render(element,True,blue)
+        window.blit(column_Alphabet_text,(index*square_size+square_size//2,window_dimensions[1]-20))
+def place_queen(row,column,window):
+    image=p.image.load("white_queen_chess_piece_by_prussiaart_dcpq5fx-pre.png")
+    square_size = (window_dimensions[0] / 4) - 5
+    image=p.transform.scale(image,(square_size-15,square_size-15)) # this takes image object,width,length of the object
+    x=row*square_size
+    y=column*square_size
+    window.blit(image,(x,y)) # this method is acted on the surface object and takes the image to put on the surface followed by the position of the image
+def draw_pygame_window(window):
+    choice_4_queens_button.config(state=tk.DISABLED)
+    global window_var
+    p.display.set_caption("This the Caption")
+    p.init()  # when we call this function we essentially call the lower level p.display.init() function
+    flags = p.RESIZABLE | p.HWSURFACE | p.DOUBLEBUF
+    window = p.display.set_mode((window_dimensions[0], window_dimensions[1]), flags)
+    rows = [1, 2, 3, 4]
+    columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    square_size = (window_dimensions[0] / 4)-5
+    # pos_x, pos_y = (0, 0)
+    clock = p.time.Clock()
+    running = True
+    while (running): # this is also called as the game loop
+        for event in p.event.get():
+            if (event.type == p.QUIT):
+                running = False
+        #window.fill(white)
+        draw_4_queens(window, square_size)
+        draw_label_for_board(window_dimensions, square_size,window)
+        #place_queen(2,2,window)
+        #Logic.place_queens_dynamically(2,2,window) # this accepts the row,column in the conventional array representation
+        Logic.main(window)
+        p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
+    p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
+    choice_4_queens_button['state']='normal'
+if(__name__=="__main__"):
+    choice_window(window_var)
+
+    # moores law....the number of transistors that are packed into a single chip double every 2 years
