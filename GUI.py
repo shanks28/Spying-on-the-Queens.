@@ -51,7 +51,7 @@ def draw_pygame_window():
     columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     square_size = (window_dimensions[0] / 4)-5
     def place_queen(row,column):
-        image=p.image.load("Queen.png")
+        image=p.image.load("white_queen_chess_piece_by_prussiaart_dcpq5fx-pre.png")
         image=p.transform.scale(image,(square_size-15,square_size-15)) # this takes image object,width,length of the object
         x=row*square_size
         y=column*square_size
