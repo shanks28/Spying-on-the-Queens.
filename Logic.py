@@ -16,17 +16,23 @@ import pygame as p
 def place_queens_dynamically(row,column,surface):
     test.place_queen(row,column,surface)
 def is_safe(binary_board,row,column): # this implementation places only 1 queen per row and hence does not check for the presence of queen in another row
-    n=len(binary_board)# number of rows ...or the number queens to be placed
-    for i in range(column):
+    n=len(binary_board)
+    # checking for columns
+    for i in range(n):
         if(binary_board[row][i]==1):
             return False
-    for i,j in zip(range(row,-1,-1),range(column,-1,-1)):# this is for the upper left diagonal we could also do upper right(Upper left is also called as the normal diagonal)
-        # The right diagonal or antidiagonal is another method to implement this
+    # checking for queens in the same row
+    for i in range(n):
+        if(binary_board[i][column]==1):
+            return False
+    # checking for upper left diagonal from the current position
+    for i,j in zip(range(row,-1,-1),range(column,-1,-1)): # zip returns a tuple of both iterables combined
         if(binary_board[i][j]==1):
             return False
-    for i,j in zip(range(row,n,1),range(column,-1,-1)): # this is for the lower left diagonal
+    for i,j in zip(range(row,-1,-1),range(column,n)):
         if(binary_board[i][j]==1):
             return False
+    # checking for upper right diagonal
     return True
 
 
@@ -38,8 +44,11 @@ def main(window):
     place_queens_dynamically(2,2,window)
 if(__name__=="__main__"):
     binary_board=[[0,1,0,0],
-                  [0,0,1,0],
-                  [0,0,0,0],
+                  [0,1,0,0],
+                  [0,0,0,1],
                   [0,0,0,0]]
-    res=is_safe(binary_board,2,1)
+    start=time.process_time()
+    res=is_safe(binary_board,3,2)
+    stop=time.process_time()
+    print(stop-start)
     print(res)
