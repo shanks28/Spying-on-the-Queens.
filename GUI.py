@@ -1,6 +1,7 @@
 import tkinter as tk
 import Logic
 import pygame as p
+import time
 window=0
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -75,3 +76,5 @@ if(__name__=="__main__"):
     choice_window()
 
     # moores law....the number of transistors that are packed into a single chip double every 2 years
+    # how the flip function works is that ...it uses double buff to draw ta hidden surface behind the one that is visible and then flips it with the one currently
+    # visible thus giving a smooth effect
