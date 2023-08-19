@@ -41,6 +41,7 @@ def draw_label_for_board(window_dimensions,square_size):
         column_Alphabet_text=font.render(element,True,blue)
         window.blit(column_Alphabet_text,(index*square_size+square_size//2,window_dimensions[1]-20))
 def draw_pygame_window():
+    animation_times=0
     global window
     choice_4_queens_button.config(state=tk.DISABLED)
     window_dimensions = [820, 820]
@@ -68,9 +69,12 @@ def draw_pygame_window():
         draw_4_queens(window, square_size)
         draw_label_for_board(window_dimensions, square_size)
         #place_queen(1,0) # this accepts the row,column in the conventional array representation
-        Logic.main(window)
-        p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
+        if(animation_times<1):
+            Logic.main(window)
+        animation_times += 1
+        #p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
     p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
+    print(Logic.stop-Logic.start)
     choice_4_queens_button['state']='normal'
 if(__name__=="__main__"):
     choice_window()
