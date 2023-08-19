@@ -40,15 +40,29 @@ def solve_4_queens():
     pass
 
 def main(window):
-    place_queens_dynamically(1,2,window)
-    place_queens_dynamically(2,2,window)
+    binary_board = [[0, 1, 0, 0],
+                    [0, 1, 0, 0],
+                    [0, 0, 0, 1],
+                    [0, 0, 0, 0]]
+    start = time.process_time()  # Measures CPU time and not Wall time
+    res = is_safe(binary_board, 3, 2)
+    stop = time.process_time()
+    for i,row_list in enumerate(binary_board):
+        for j in range(len(row_list)):
+            if (binary_board[i][j] == 1):
+                place_queens_dynamically(j,i,window)
+                #place_queens_dynamically(0,2,window)
 if(__name__=="__main__"):
-    binary_board=[[0,1,0,0],
-                  [0,1,0,0],
-                  [0,0,0,1],
-                  [0,0,0,0]]
-    start=time.process_time()
-    res=is_safe(binary_board,3,2)
-    stop=time.process_time()
-    print(stop-start)
-    print(res)
+
+    binary_board = [[0, 1, 0, 0],
+                    [0, 1, 0, 0],
+                    [0, 0, 0, 1],
+                    [0, 0, 0, 0]]
+    start = time.process_time()  # Measures CPU time and not Wall time
+    res = is_safe(binary_board, 3, 2)
+    stop = time.process_time()
+    print(binary_board[0][2])
+    for i, row_list in enumerate(binary_board):
+        for j in range(len(row_list)):
+            if (binary_board[i][j] == 1):
+                print(i, j)
