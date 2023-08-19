@@ -13,6 +13,8 @@ import pygame as p
 # for row in range(row_length):
 #     for col in range(col_lemgth):
 #         pass
+start=0
+stop=0
 def place_queens_dynamically(row,column,surface):
     test.place_queen(row,column,surface)
 def is_safe(binary_board,row,column): # this implementation places only 1 queen per row and hence does not check for the presence of queen in another row
@@ -40,21 +42,31 @@ def solve_4_queens():
     pass
 
 def main(window):
-    binary_board = [[0, 1, 0, 0],
+    global start,stop
+    number_placed_queens=0
+    stop_placing=False
+    binary_board = [[1, 1, 1, 1],
                     [0, 1, 0, 0],
                     [0, 0, 0, 1],
                     [0, 0, 0, 0]]
     start = time.process_time()  # Measures CPU time and not Wall time
-    res = is_safe(binary_board, 3, 2)
-    stop = time.process_time()
     for i,row_list in enumerate(binary_board):
+        if(stop_placing):
+            break
         for j in range(len(row_list)):
             if (binary_board[i][j] == 1):
                 place_queens_dynamically(j,i,window)
+                p.display.flip()
+                number_placed_queens+=1
+                time.sleep(1)
+                if(number_placed_queens==4):
+                    stop_placing=True
+                    break
                 #place_queens_dynamically(0,2,window)
+    stop = time.process_time()
 if(__name__=="__main__"):
 
-    binary_board = [[0, 1, 0, 0],
+    binary_board = [[1, 1, 1, 1],
                     [0, 1, 0, 0],
                     [0, 0, 0, 1],
                     [0, 0, 0, 0]]
