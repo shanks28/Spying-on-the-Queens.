@@ -16,3 +16,4 @@ There are mainly 2 factors to solving this problem
     1).Propagation:At each new state the solver looks at the next possible state and thus eliminating all of the other unwanted conditions
     2).Backtracking:The solver backtracks to a previous state given that the current state has no possibility to lead to the end state.
     This method is known as constraint Programming
+it is very important in animation that ...when we want to remove something from a certain...we have to redraw over that particular surface

@@ -70,7 +70,7 @@ def draw_pygame_window():
         draw_label_for_board(window_dimensions, square_size)
         #place_queen(1,0) # this accepts the row,column in the conventional array representation
         if(animation_times<1):
-            Logic.main(window)
+            Logic.main(window,4)
         animation_times += 1
         #p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
     p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
