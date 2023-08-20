@@ -2,22 +2,13 @@ import Tester as test
 import random
 import time
 import pygame as p
-# we consider the board in this module as a 2D array of rows and column
-'''
-    we know that there can be only 1 queen per row
-    Consider the board as a matrix
-
-    '''
-# draw_object=draw_pygame_window()
-# row_length,col_lemgth=(4,4)
-# for row in range(row_length):
-#     for col in range(col_lemgth):
-#         pass
+import anim_essentials
 start=0
 stop=0
 def place_queens_dynamically(row,column,surface):
     test.place_queen(row,column,surface)
-def is_safe(binary_board,row,column): # this implementation places only 1 queen per row and hence does not check for the presence of queen in another row
+    p.display.flip()
+def is_safe(binary_board,row,column):
     n=len(binary_board)
     # checking for columns
     for i in range(n):
@@ -38,43 +29,51 @@ def is_safe(binary_board,row,column): # this implementation places only 1 queen 
     return True
 
 
-def solve_4_queens():
-    pass
-
-def main(window):
-    global start,stop
-    number_placed_queens=0
-    stop_placing=False
-    binary_board = [[1, 1, 1, 1],
-                    [0, 1, 0, 0],
-                    [0, 0, 0, 1],
-                    [0, 0, 0, 0]]
+def solve_n_queens(column,binary_board):
+     # initializing the board with all empty spaces initially
+    if(column>=len(binary_board)):
+        return True
+    for i in range(len(binary_board)): # this is to iterate through all the columns to place the queens column by column
+        if(is_safe(binary_board,i,column)):
+            binary_board[i][column]=1
+            if(solve_n_queens(column+1,binary_board)):
+                return True
+            binary_board[i][column]=0
+    return False
+def visualizer(window,n):
+    global start, stop
+    binary_board=[[0,0,0,0],
+                  [0,0,0,0],
+                  [0,0,0,0],
+                  [0,0,0,0]]
+    solve_n_queens(0,binary_board)
     start = time.process_time()  # Measures CPU time and not Wall time
-    for i,row_list in enumerate(binary_board):
-        if(stop_placing):
-            break
-        for j in range(len(row_list)):
-            if (binary_board[i][j] == 1):
-                place_queens_dynamically(j,i,window)
-                p.display.flip()
-                number_placed_queens+=1
-                time.sleep(1)
-                if(number_placed_queens==4):
-                    stop_placing=True
-                    break
-                #place_queens_dynamically(0,2,window)
-    stop = time.process_time()
-if(__name__=="__main__"):
-
-    binary_board = [[1, 1, 1, 1],
-                    [0, 1, 0, 0],
-                    [0, 0, 0, 1],
-                    [0, 0, 0, 0]]
-    start = time.process_time()  # Measures CPU time and not Wall time
-    res = is_safe(binary_board, 3, 2)
-    stop = time.process_time()
-    print(binary_board[0][2])
     for i, row_list in enumerate(binary_board):
         for j in range(len(row_list)):
             if (binary_board[i][j] == 1):
-                print(i, j)
+                place_queens_dynamically(j, i, window)
+                time.sleep(1)
+                # place_queens_dynamically(0,2,window)
+    anim_essentials.erase_queen(3, 0, window)
+    time.sleep(1)
+    stop = time.process_time()
+    print(stop - start)
+def main(window,n):
+    visualizer(window,n)
+if(__name__=="__main__"):
+
+    # binary_board = [[1, 1, 1, 1],
+    #                 [0, 1, 0, 0],
+    #                 [0, 0, 0, 1],
+    #                 [0, 0, 0, 0]]
+    # start = time.process_time()  # Measures CPU time and not Wall time
+    # res = is_safe(binary_board, 3, 2)
+    # stop = time.process_time()
+    # print(binary_board[0][2])
+    # for i, row_list in enumerate(binary_board):
+    #     for j in range(len(row_list)):
+    #         if (binary_board[i][j] == 1):
+    #             print(i, j)
+    binary_board=[[0]*4]*4
+
+    print(binary_board)
