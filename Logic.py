@@ -29,27 +29,25 @@ def is_safe(binary_board,row,column):
     return True
 
 
-def solve_n_queens(column,binary_board,window):
+def solve_n_queens(row,binary_board,window):
      # initializing the board with all empty spaces initially
-    if(column>=len(binary_board)):
+    if(row>=len(binary_board)):
         return True
     for i in range(len(binary_board)): # this is to iterate through all the columns to place the queens column by column
-        if(is_safe(binary_board,column,i)):
-            binary_board[column][i]=1
-            place_queens_dynamically(column,i,window)
-            time.sleep(1)
-            if(solve_n_queens(column+1,binary_board,window)):
+        if(is_safe(binary_board,row,i)):
+            binary_board[row][i]=1
+            place_queens_dynamically(i,row,window)
+            time.sleep(2)
+            if(solve_n_queens(row+1,binary_board,window)):
                 return True
-            binary_board[column][i]=0
-            anim_essentials.erase_queen(column,i,window)
-            time.sleep(1)
+            binary_board[row][i]=0
+            anim_essentials.erase_queen(i,row,window)
+            time.sleep(2)
     return False
 def visualizer(window,n):
     global start, stop
-    binary_board=[[0,0,0,0],
-                  [0,0,0,0],
-                  [0,0,0,0],
-                  [0,0,0,0]]
+    binary_board=[[0]*n for i in range(n)]
+    print(binary_board)
     start=time.process_time()
     solve_n_queens(0,binary_board,window)
     stop=time.process_time()
@@ -66,6 +64,9 @@ def visualizer(window,n):
     # print(stop - start)
 def main(window,n):
     visualizer(window,n)
+    # place_queens_dynamically(0,3,window)
+    # time.sleep(2)
+    # anim_essentials.erase_queen(0,3,window)
 if(__name__=="__main__"):
 
     # binary_board = [[1, 1, 1, 1],
@@ -81,5 +82,4 @@ if(__name__=="__main__"):
     #         if (binary_board[i][j] == 1):
     #             print(i, j)
     binary_board=[[0]*4]*4
-
     print(binary_board)
