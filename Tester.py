@@ -6,7 +6,7 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 blue=(255,0,0) # this is of the form RGB in that order
 choice_4_queens_button=None
-window_dimensions = [820, 820]
+window_dimensions = [1000, 1000]
 def choice_window(window):
     global choice_4_queens_button
     global window_var
@@ -22,8 +22,8 @@ def choice_window(window):
     choice_4_queens_button.pack(pady=50)
     start_window.mainloop()
 def draw_4_queens(window,square_size):
-    for rows in range(0, 4):
-        for columns in range(0, 4):
+    for rows in range(0, n):
+        for columns in range(0, n):
             pos_x = (rows * square_size)
             pos_y = (columns * square_size)
 
@@ -42,8 +42,8 @@ def draw_label_for_board(window_dimensions,square_size,window):
         window.blit(column_Alphabet_text,(index*square_size+square_size//2,window_dimensions[1]-20))
 def place_queen(row,column,window):
     image=p.image.load("white_queen_chess_piece_by_prussiaart_dcpq5fx-pre.png")
-    square_size = (window_dimensions[0] / 4) - 5
-    image=p.transform.scale(image,(square_size-15,square_size-15)) # this takes image object,width,length of the object
+    square_size = (window_dimensions[0] / n) - 5
+    image=p.transform.scale(image,(square_size-5,square_size-5)) # this takes image object,width,length of the object
     x=row*square_size
     y=column*square_size
     window.blit(image,(x,y)) # this method is acted on the surface object and takes the image to put on the surface followed by the position of the image
@@ -57,7 +57,7 @@ def draw_pygame_window(window):
     window_var=window
     rows = [1, 2, 3, 4]
     columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    square_size = (window_dimensions[0] / 4)-5
+    square_size = (window_dimensions[0] / n)-5
     # pos_x, pos_y = (0, 0)
     clock = p.time.Clock()
     running = True
@@ -70,7 +70,8 @@ def draw_pygame_window(window):
         draw_label_for_board(window_dimensions, square_size,window)
         #place_queen(2,2,window)
         #Logic.place_queens_dynamically(2,2,window) # this accepts the row,column in the conventional array representation
-        Logic.main(window_var)
+        #Logic.main(window_var,4)
+        place_queen(0,1,window)
         p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
     p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
     choice_4_queens_button['state']='normal'
