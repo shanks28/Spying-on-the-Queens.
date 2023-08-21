@@ -1,12 +1,10 @@
-import Tester as test
-import random
 import time
 import pygame as p
 import anim_essentials
 start=0
 stop=0
-def place_queens_dynamically(row,column,surface):
-    test.place_queen(row,column,surface)
+def place_queens_dynamically(row,column,surface,n):
+    anim_essentials.place_queen(row,column,surface,n)
     p.display.flip()
 def is_safe(binary_board,row,column):
     n=len(binary_board)
@@ -29,44 +27,30 @@ def is_safe(binary_board,row,column):
     return True
 
 
-def solve_n_queens(row,binary_board,window):
+def solve_n_queens(row,binary_board,window,n):
      # initializing the board with all empty spaces initially
     if(row>=len(binary_board)):
         return True
     for i in range(len(binary_board)): # this is to iterate through all the columns to place the queens column by column
         if(is_safe(binary_board,row,i)):
             binary_board[row][i]=1
-            place_queens_dynamically(i,row,window)
-            time.sleep(2)
-            if(solve_n_queens(row+1,binary_board,window)):
+            place_queens_dynamically(i,row,window,n)
+            time.sleep(.1)
+            if(solve_n_queens(row+1,binary_board,window,n)):
                 return True
             binary_board[row][i]=0
-            anim_essentials.erase_queen(i,row,window)
-            time.sleep(2)
+            anim_essentials.erase_queen(i,row,window,n)
+            time.sleep(.1)
     return False
 def visualizer(window,n):
     global start, stop
     binary_board=[[0]*n for i in range(n)]
     print(binary_board)
     start=time.process_time()
-    solve_n_queens(0,binary_board,window)
+    solve_n_queens(0,binary_board,window,n)
     stop=time.process_time()
-    # start = time.process_time()  # Measures CPU time and not Wall time
-    # for i, row_list in enumerate(binary_board):
-    #     for j in range(len(row_list)):
-    #         if (binary_board[i][j] == 1):
-    #             place_queens_dynamically(j, i, window)
-    #             time.sleep(1)
-    #             # place_queens_dynamically(0,2,window)
-    # anim_essentials.erase_queen(1, 0, window)
-    # time.sleep(1)
-    # stop = time.process_time()
-    # print(stop - start)
 def main(window,n):
     visualizer(window,n)
-    # place_queens_dynamically(0,3,window)
-    # time.sleep(2)
-    # anim_essentials.erase_queen(0,3,window)
 if(__name__=="__main__"):
 
     # binary_board = [[1, 1, 1, 1],
