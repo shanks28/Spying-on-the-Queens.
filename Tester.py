@@ -1,80 +1,123 @@
-import tkinter as tk
-import Logic
-window_var=0
+import time
 import pygame as p
-black = (0, 0, 0)
-white = (255, 255, 255)
-blue=(255,0,0) # this is of the form RGB in that order
-choice_4_queens_button=None
-window_dimensions = [820, 820]
-def choice_window(window):
-    global choice_4_queens_button
-    global window_var
-    start_window=tk.Tk()
-    start_window.geometry("800x300")
-    Choice_label=tk.Label(start_window,text="How many Queens do you want to demonstrate,sensei? ")
-    Choice_label.config(font=("Arial",20),fg="Green",bg="blacK") # the named parameters fg and bg are case insensitive and they convert to lower in the implementation
-    Choice_label.pack()
-    start_window.title("This is the first window")
-    start_window.config(bg="Black")
-    choice_4_queens_button=tk.Button(start_window,text="4 Queens",command=lambda : draw_pygame_window(window))
-    choice_4_queens_button.config(fg="cyan",bg="black",font=("arial",15))
-    choice_4_queens_button.pack(pady=50)
-    start_window.mainloop()
-def draw_4_queens(window,square_size):
-    for rows in range(0, 4):
-        for columns in range(0, 4):
-            pos_x = (rows * square_size)
-            pos_y = (columns * square_size)
+import anim_essentials
+import cProfile
+from line_profiler import LineProfiler
+start=0
+stop=0
+def place_queens_dynamically(row,column,surface,n):
+    anim_essentials.place_queen(row,column,surface,n)
+    p.display.flip()
+def is_safe(binary_board,row,column):
+    n=len(binary_board)
+    # checking for columns
+    for i in range(n):
+        if(binary_board[row][i]==1):
+            return False
+    # checking for queens in the same row
+    for i in range(n):
+        if(binary_board[i][column]==1):
+            return False
+    # checking for upper left diagonal from the current position
+    for i,j in zip(range(row,-1,-1),range(column,-1,-1)): # zip returns a tuple of both iterables combined
+        if(binary_board[i][j]==1):
+            return False
+    for i,j in zip(range(row,-1,-1),range(column,n)):
+        if(binary_board[i][j]==1):
+            return False
+    # checking for upper right diagonal
+    return True
 
-            if ((rows + columns) % 2): # we could also replace this with an inline if statement but that would then require a mandatory else statement.
-                p.draw.rect(window, black, (pos_x, pos_y, square_size, square_size))
-            else:
-                p.draw.rect(window, white, (pos_x, pos_y, square_size, square_size))
-
-def draw_label_for_board(window_dimensions,square_size,window):
-    for index,element in enumerate([1,2,3,4][::-1]): # For ROWS
-        font = p.font.Font(None, 40)
-        row_number_text=font.render(str(element),True,blue) # this function takes the string to be rendered , a boolean asking ifyou want antialiasing and athe color of the string that is to be rendered
-        window.blit(row_number_text,(window_dimensions[0]-20,index*square_size+square_size//2)) # this takes....source,(x,y) as parameters
-    for index,element in enumerate(['A','B','C','D']):
-        column_Alphabet_text=font.render(element,True,blue)
-        window.blit(column_Alphabet_text,(index*square_size+square_size//2,window_dimensions[1]-20))
-def place_queen(row,column,window):
-    image=p.image.load("white_queen_chess_piece_by_prussiaart_dcpq5fx-pre.png")
-    square_size = (window_dimensions[0] / 4) - 5
-    image=p.transform.scale(image,(square_size-15,square_size-15)) # this takes image object,width,length of the object
-    x=row*square_size
-    y=column*square_size
-    window.blit(image,(x,y)) # this method is acted on the surface object and takes the image to put on the surface followed by the position of the image
-def draw_pygame_window(window):
-    choice_4_queens_button.config(state=tk.DISABLED)
-    global window_var
-    p.display.set_caption("This the Caption")
-    p.init()  # when we call this function we essentially call the lower level p.display.init() function
-    flags = p.RESIZABLE | p.HWSURFACE | p.DOUBLEBUF
-    window = p.display.set_mode((window_dimensions[0], window_dimensions[1]), flags)
-    window_var=window
-    rows = [1, 2, 3, 4]
-    columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    square_size = (window_dimensions[0] / 4)-5
-    # pos_x, pos_y = (0, 0)
-    clock = p.time.Clock()
-    running = True
-    while (running): # this is also called as the game loop
-        for event in p.event.get():
-            if (event.type == p.QUIT):
-                running = False
-        #window.fill(white)
-        draw_4_queens(window, square_size)
-        draw_label_for_board(window_dimensions, square_size,window)
-        #place_queen(2,2,window)
-        #Logic.place_queens_dynamically(2,2,window) # this accepts the row,column in the conventional array representation
-        Logic.main(window_var)
-        p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
-    p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
-    choice_4_queens_button['state']='normal'
+@profile
+def solve_n_queens(row,binary_board,n):
+     # initializing the board with all empty spaces initially
+    if(row>=len(binary_board)):
+        return True
+    for i in range(len(binary_board)): # this is to iterate through all the columns to place the queens column by column
+        if(is_safe(binary_board,row,i)):
+            binary_board[row][i]=1
+            # place_queens_dynamically(i,row,window,n)
+            # time.sleep(.1)
+            if(solve_n_queens(row+1,binary_board,n)):
+                return True
+            binary_board[row][i]=0
+            # anim_essentials.erase_queen(i,row,window,n)
+            # time.sleep(.1)
+    return False
+def visualizer(n):
+    binary_board=[[0]*n for i in range(n)]
+    solve_n_queens(0,binary_board,n)
+    print(binary_board)
+def main(n):
+    visualizer(n)
 if(__name__=="__main__"):
-    choice_window(window_var)
-
-    # moores law....the number of transistors that are packed into a single chip double every 2 years
+    binary_board = [[0] * 9 for i in range(9)]
+    profiler=LineProfiler()
+    profiler.add_function(solve_n_queens)
+    profiler.enable_by_count()
+    result=solve_n_queens(0,binary_board,9)
+    profiler.disable_by_count()
+    profiler.print_stats
+    # user_input = input("Enter a string: ")
+    # dict1 = {'(':0,')':0}
+    # for i in user_input:
+    #     if (i == '('):
+    #         dict1['(']+=1
+    #     else:
+    #         dict1[')']+=1
+    # if (dict1['('] == dict1[')']):
+    #     print("balanced")
+    # else:
+    #     if (dict1['('] > dict1[')']):
+    #         print("{} {} are required".format(dict1['('] - dict1[')'], ')'))
+    #     else:
+    #         print("{} {} are required".format(dict1[')'] - dict1['('], '('))
+    # profiler=cProfile.Profile()
+    # profiler.enable()
+    # main(20)
+    # profiler.disable()
+    # profiler.print_stats(sort="cumulative")
+    # def swap_brute_function(user_input):
+    #     length=len(user_input)
+    #     res_list=[]
+    #
+    #     for i in range(0,length-2,2):
+    #         res_list.append(user_input[i+1])
+    #         res_list.append(user_input[i])
+    #     if(length%2==0):
+    #         res_list.append(user_input[-1])
+    #         res_list.append(user_input[-2])
+    #     else:
+    #         res_list.append(user_input[-1])
+    #     return res_list
+    # def merge(left,right):
+    #     i,j,k=0,0,0
+    #     m=len(left)
+    #     n=len(right)
+    #     res=[]
+    #     while(i<m and j<n):
+    #         res.append(left[i+1])
+    #         j+=2
+    #         res.append(right[j])
+    #         i+=2
+    #     while i<m:
+    #         res.append(left[i])
+    #         i+=1
+    #     while j<n:
+    #         res.append(right[j])
+    #         j+=1
+    #     return res
+    # def swap_function_divide(user_input):
+    #     if(len(user_input)<=1):
+    #         return
+    #     mid=len(user_input)//2
+    #     left=user_input[:mid]
+    #     right=user_input[mid:]
+    #     swapped_left=swap_function_divide(left)
+    #     swapper_right=swap_function_divide(right)
+    #     res=merge(swapped_left,swapper_right)
+    #     return  res
+    # user_input=[12,42,9,30,56,20]
+    # res=swap_function_divide(user_input)
+    # print(res)
+    pass

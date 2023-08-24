@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spying on The Queens</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1 align="center">Spying On The Queens</h1>
+    </header>
+
+    <section class="intro-section">
+        <div class="intro-content">
+            <h2>About the Problem</h2>
+            <p>Discover the fascinating world of the N-Queens problem! The N-Queens problem is a classic chess puzzle that involves placing N chess queens on an N×N chessboard so that no two queens threaten each other.</p>
+            <p>Join us in exploring the solutions to this intriguing puzzle and witness how the queens are strategically placed on the board, avoiding all conflicts.</p>
+        </div>
+        <div class="queen-image">
+            <img src="https://img.freepik.com/premium-photo/two-stand-golden-silver-king-chess-winner-business-alliance-marketing-strategy-planing-concept_50039-2600.jpg" alt="Chess Queens">
+        </div>
+    </section>
+
+    <section class="user-input-section">
+        <h2>Try It Yourself</h2>
+        <label for="numberInput">Enter the board size:</label>
+        <input type="number" id="numberInput">
+        <button onclick="fetchNumber()">Show Queens Placement</button>
+    </section>
+
+    <script>
+        function fetchNumber(){
+            var user_input = document.getElementById("numberInput").value;
+            alert("You entered " + user_input);
+            // You can now use this input to visualize the placement of queens
+            // and solve the N-Queens problem.
+        }
+    </script>
+</body>
+</html>
