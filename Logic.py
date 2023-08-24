@@ -45,9 +45,12 @@ def solve_n_queens(row,binary_board,window,n):
 def visualizer(window,n):
     global start, stop
     binary_board=[[0]*n for i in range(n)]
-    print(binary_board)
+    #print(binary_board)
     start=time.process_time()
-    solve_n_queens(0,binary_board,window,n)
+    try:
+        solve_n_queens(0,binary_board,window,n)
+    except Exception as e:
+        print(e)
     stop=time.process_time()
 def main(window,n):
     visualizer(window,n)
