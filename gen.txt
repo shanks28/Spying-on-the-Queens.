@@ -17,3 +17,6 @@ There are mainly 2 factors to solving this problem
     2).Backtracking:The solver backtracks to a previous state given that the current state has no possibility to lead to the end state.
     This method is known as constraint Programming
 it is very important in animation that ...when we want to remove something from a certain...we have to redraw over that particular surface
+for generating the profile file we do.... kernprof -l your_script.py
+to view the file we do ....python -m line_profiler your_script.py.lprof
+
