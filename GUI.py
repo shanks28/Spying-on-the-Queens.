@@ -29,11 +29,11 @@ def choice_window():
     choice_n_queens_button.pack(pady=50)
     start_window.mainloop()
 def draw_4_queens(window,square_size):
+
     for rows in range(0, n):
         for columns in range(0, n):
             pos_x = (rows * square_size)
             pos_y = (columns * square_size)
-
             if ((rows + columns) % 2): # we could also replace this with an inline if statement but that would then require a mandatory else statement.
                 p.draw.rect(window, black, (pos_x, pos_y, square_size, square_size))
             else:
@@ -65,7 +65,7 @@ def draw_pygame_window():
         image=p.transform.scale(image,(square_size-15,square_size-15)) # this takes image object,width,length of the object
         x=row*square_size
         y=column*square_size
-        window.blit(image,(x,y)) # this method is acted on the surface object and takes the image to put on the surface followed by the position of the image
+        window.blit(image,(x,y))
     # pos_x, pos_y = (0, 0)
     clock = p.time.Clock()
     running = True
@@ -81,7 +81,6 @@ def draw_pygame_window():
             Logic.main(window,n)
         animation_times += 1
         #p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
-    p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
     print(Logic.stop-Logic.start)
     choice_n_queens_button['state']='normal'
 if(__name__=="__main__"):
