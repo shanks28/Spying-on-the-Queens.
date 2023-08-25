@@ -81,6 +81,8 @@ def draw_pygame_window():
             Logic.main(window,n)
         animation_times += 1
         #p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
+
+    p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
     print(Logic.stop-Logic.start)
     choice_n_queens_button['state']='normal'
 if(__name__=="__main__"):
