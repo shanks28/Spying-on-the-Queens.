@@ -2,6 +2,7 @@ import tkinter as tk
 import Logic
 import pygame as p
 import time
+import psutil
 window=0
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -84,6 +85,7 @@ def draw_pygame_window():
 
     p.display.quit()  # this is already handled when the program exits and is harmless to call it again this is to just create an exit point for my function
     print(Logic.stop-Logic.start)
+
     choice_n_queens_button['state']='normal'
 if(__name__=="__main__"):
     choice_window()

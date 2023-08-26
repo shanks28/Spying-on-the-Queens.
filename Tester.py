@@ -3,6 +3,7 @@ import pygame as p
 import anim_essentials
 import cProfile
 from line_profiler import LineProfiler
+from memory_profiler import profile
 start=0
 stop=0
 def place_queens_dynamically(row,column,surface,n):
@@ -28,7 +29,6 @@ def is_safe(binary_board,row,column):
     # checking for upper right diagonal
     return True
 
-@profile
 def solve_n_queens(row,binary_board,n):
      # initializing the board with all empty spaces initially
     if(row>=len(binary_board)):
@@ -38,8 +38,7 @@ def solve_n_queens(row,binary_board,n):
             binary_board[row][i]=1
             # place_queens_dynamically(i,row,window,n)
             # time.sleep(.1)
-            if(solve_n_queens(row+1,binary_board,n)):
-                return True
+            solve_n_queens(row+1,binary_board,n)
             binary_board[row][i]=0
             # anim_essentials.erase_queen(i,row,window,n)
             # time.sleep(.1)
@@ -51,14 +50,7 @@ def visualizer(n):
 def main(n):
     visualizer(n)
 if(__name__=="__main__"):
-    binary_board = [[0] * 9 for i in range(9)]
-    profiler=LineProfiler()
-    profiler.add_function(solve_n_queens)
-    profiler.enable_by_count()
-    result=solve_n_queens(0,binary_board,9)
-    profiler.disable_by_count()
-    profiler.print_stats
-    # user_input = input("Enter a string: ")
+    visualizer(9)
     # dict1 = {'(':0,')':0}
     # for i in user_input:
     #     if (i == '('):

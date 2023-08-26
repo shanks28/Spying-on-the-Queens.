@@ -1,6 +1,8 @@
 import time
 import pygame as p
 import anim_essentials
+import sys
+from threading import stack_size
 start=0
 stop=0
 def place_queens_dynamically(row,column,surface,n):
@@ -9,11 +11,11 @@ def place_queens_dynamically(row,column,surface,n):
 def is_safe(binary_board,row,column):
     n=len(binary_board)
     # checking for columns
-    for i in range(n):
+    for i in range(column):
         if(binary_board[row][i]==1):
             return False
     # checking for queens in the same row
-    for i in range(n):
+    for i in range(row):
         if(binary_board[i][column]==1):
             return False
     # checking for upper left diagonal from the current position
@@ -35,12 +37,12 @@ def solve_n_queens(row,binary_board,window,n):
         if(is_safe(binary_board,row,i)):
             binary_board[row][i]=1
             place_queens_dynamically(i,row,window,n)
-            time.sleep(.1)
+            #time.sleep(.1)
             if(solve_n_queens(row+1,binary_board,window,n)):
                 return True
             binary_board[row][i]=0
             anim_essentials.erase_queen(i,row,window,n)
-            time.sleep(.1)
+            #time.sleep(.1)
     return False
 def visualizer(window,n):
     global start, stop
@@ -68,5 +70,6 @@ if(__name__=="__main__"):
     #     for j in range(len(row_list)):
     #         if (binary_board[i][j] == 1):
     #             print(i, j)
-    binary_board=[[0]*4]*4
-    print(binary_board)
+    stack_size(4096 * 16)
+    size = stack_size()
+    print(size)
