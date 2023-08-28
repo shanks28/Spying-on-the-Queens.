@@ -19,4 +19,17 @@ There are mainly 2 factors to solving this problem
 it is very important in animation that ...when we want to remove something from a certain...we have to redraw over that particular surface
 for generating the profile file we do.... kernprof -l your_script.py
 to view the file we do ....python -m line_profiler your_script.py.lprof
+The backtracking approach was a type of DFS This uses a stack BFS uses a queue
 
+Hill climbing....
+        The function starts by making small changes to the initial configuration
+        This belongs to the family of local search algorithms
+        THe algorithm continues to make these changes until local maxima is obtained which means that no further optimization can be made with the current set of
+        moves
+        This is very subjective to the initial solution and the final solution depends on the initial solution so if we have a bad initial solution the final
+        solution may be not optimal
+The  heuristic hill climbing algorithm is a type of informed search algorithm
+        There is a heuristic function that estimates how close a state is to the goal state
+
+
+        The heuristic  searches include....DFS BFS UCS

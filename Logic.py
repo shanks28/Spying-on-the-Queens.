@@ -22,27 +22,27 @@ def is_safe(binary_board,row,column):
     for i,j in zip(range(row,-1,-1),range(column,-1,-1)): # zip returns a tuple of both iterables combined
         if(binary_board[i][j]==1):
             return False
-    for i,j in zip(range(row,-1,-1),range(column,n)):
+    for i,j in zip(range(row,n),range(column,-1,-1)):
         if(binary_board[i][j]==1):
             return False
     # checking for upper right diagonal
     return True
+# The secondary diagonal is the right diagonal and the primary diagonal is the left diagonal
 
-
-def solve_n_queens(row,binary_board,window,n):
+def solve_n_queens(column,binary_board,window,n):
      # initializing the board with all empty spaces initially
-    if(row>=len(binary_board)):
+    if(column>=len(binary_board)):
         return True
-    for i in range(len(binary_board)): # this is to iterate through all the columns to place the queens column by column
-        if(is_safe(binary_board,row,i)):
-            binary_board[row][i]=1
-            place_queens_dynamically(i,row,window,n)
-            #time.sleep(.1)
-            if(solve_n_queens(row+1,binary_board,window,n)):
+    for i in range(len(binary_board)): # this is to iterate through all the columns to place the queens row by row
+        if(is_safe(binary_board,i,column)):
+            binary_board[i][column]=1
+            place_queens_dynamically(i,column,window,n)
+            time.sleep(2)
+            if(solve_n_queens(column+1,binary_board,window,n)):
                 return True
-            binary_board[row][i]=0
-            anim_essentials.erase_queen(i,row,window,n)
-            #time.sleep(.1)
+            binary_board[i][column]=0
+            anim_essentials.erase_queen(i,column,window,n)
+            time.sleep(2)
     return False
 def visualizer(window,n):
     global start, stop
