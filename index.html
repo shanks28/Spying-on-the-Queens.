@@ -3,42 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spying on The Queens</title>
+    <title>N Queens Problem</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts.js"></script>
 </head>
 <body>
     <header>
-        <h1 align="center">Spying On The Queens</h1>
+        <h1>N Queens Problem</h1>
     </header>
-
-    <section class="intro-section">
-        <div class="intro-content">
-            <h2>About the Problem</h2>
-            <p>Discover the fascinating world of the N-Queens problem! The N-Queens problem is a classic chess puzzle that involves placing N chess queens on an N×N chessboard so that no two queens threaten each other.</p>
-            <p>Join us in exploring the solutions to this intriguing puzzle and witness how the queens are strategically placed on the board, avoiding all conflicts.</p>
-        </div>
-        <div class="queen-image">
-            <img src="https://img.freepik.com/premium-photo/two-stand-golden-silver-king-chess-winner-business-alliance-marketing-strategy-planing-concept_50039-2600.jpg" alt="Chess Queens">
-        </div>
-    </section>
-
-    <section class="user-input-section">
-        <h2>Try It Yourself</h2>
-        <label for="numberInput">Enter the board size:</label>
-        <input type="number" id="numberInput">
-        <button onclick="fetchNumber()">Show Queens Placement</button>
-    </section>
-
-    <script type="text/javascript">
-        function fetchNumber(){
-            var user_input = document.getElementById("numberInput").value;
-            alert("You entered " + user_input);
-            // You can now use this input to visualize the placement of queens
-            // and solve the N-Queens problem.
-        }
-    </script>
-    <br>
-    <h1>For more information on Diagonals refer this </h1>
-    <iframe src="https://www.javatpoint.com/interchange-diagonal-elements-java-program" ></iframe>
+    <main>
+        <section id="description">
+            <h2>About the N Queens Problem</h2>
+            <!-- Add your description of the N Queens problem here -->
+        </section>
+        <section id="animation">
+            <h2>Animation of 8 Queens using Backtracking</h2>
+            <div id="chessboard"></div>
+            <button id="startAnimation">Start Animation</button>
+        </section>
+        <section id="graph">
+            <h2>Graph of Time Taken under Various Inputs</h2>
+            <div class="chart-container">
+                <canvas id="timeGraph"></canvas>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
