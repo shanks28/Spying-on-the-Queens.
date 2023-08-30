@@ -37,12 +37,12 @@ def solve_n_queens(column,binary_board,window,n):
         if(is_safe(binary_board,i,column)):
             binary_board[i][column]=1
             place_queens_dynamically(i,column,window,n)
-            time.sleep(2)
+            #time.sleep(.1)
             if(solve_n_queens(column+1,binary_board,window,n)):
                 return True
             binary_board[i][column]=0
             anim_essentials.erase_queen(i,column,window,n)
-            time.sleep(2)
+            #time.sleep(.1)
     return False
 def visualizer(window,n):
     global start, stop
