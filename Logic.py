@@ -7,7 +7,6 @@ start=0
 stop=0
 def place_queens_dynamically(row,column,surface,n):
     anim_essentials.place_queen(row,column,surface,n)
-    p.display.flip()
 def is_safe(binary_board,row,column):
     n=len(binary_board)
     # checking for columns

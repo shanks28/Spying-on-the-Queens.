@@ -17,3 +17,4 @@ def place_queen(row,column,window,n):
     x=row*square_size
     y=column*square_size
     window.blit(image,(y,x)) # this method is acted on the surface object and takes the image to put on the surface followed by the position of the image
+    p.display.flip()

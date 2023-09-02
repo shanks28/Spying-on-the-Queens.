@@ -3,6 +3,7 @@ import Logic
 import pygame as p
 import time
 import psutil
+import Hill_Climbing
 window=0
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -79,7 +80,7 @@ def draw_pygame_window():
         draw_label_for_board(window_dimensions, square_size)
         #place_queen(1,0) # this accepts the row,column in the conventional array representation
         if(animation_times<1):
-            Logic.main(window,n)
+            Hill_Climbing.visualizer(window,n)
         animation_times += 1
         #p.display.flip() # if we call this function there is no necesscity to call the display.update because this updates the entire screen compared to the part by part of the update function
 
