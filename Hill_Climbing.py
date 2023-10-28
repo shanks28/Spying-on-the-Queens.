@@ -1,6 +1,7 @@
 import random
 import time
 import anim_essentials
+from memory_profiler import profile
 start,stop=(0,0)
 def convert_binary_board(board):
     n = len(board)
@@ -22,6 +23,7 @@ def h_cost(board):
             if(board[i]==board[j]-slope or board[i]==board[j]+slope): # y=mx+c
                 conflicts+=1
     return conflicts
+@profile
 def simple_hill_climbing(n,max_iterations):
     board=[]
     for num in range(n):
@@ -35,7 +37,7 @@ def simple_hill_climbing(n,max_iterations):
         queen_choice=random.randint(0,n-1)
         next_row=random.randint(0,n-1)
         neighbor_config[queen_choice]=next_row
-        new_conflicts=h_cost(neighbor_config) # getting the heuristic cost of the new configuration
+        new_conflicts=h_cost(neighbor_config) # getting the heuristic cost of the new configuratio
 
         if(new_conflicts< conflicts): # a better solution has been attained
             board=neighbor_config
@@ -57,5 +59,5 @@ def visualizer(window,n):
                 time.sleep(.1)
     print(h_cost(board))
 if(__name__=="__main__"):
-    max_iterations=100
-
+    board=simple_hill_climbing(1000,1000)
+    print(h_cost(board))
