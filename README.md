@@ -31,19 +31,19 @@ Heuristic Hill Climbing is an optimization technique which starts with an arbitr
 1. Clone the repository:
    ```bash
    git clone https://github.com/shanks28/Spying-on-the-Queens..git
-Navigate to the project directory:
+2.Navigate to the project directory:
 
 ```bash
 
 cd Spying-on-the-Queens
 ```
-2.Install the required packages:
+3.Install the required packages:
 
 ```bash
 
 pip install pygame tkinter
 ```
-3.Running the Application:
+4.Running the Application:
 
 To run the application, execute:
 
