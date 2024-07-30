@@ -37,13 +37,13 @@ Navigate to the project directory:
 
 cd n-queens-visualization
 ```
-Install the required packages:
+2.Install the required packages:
 
 ```bash
 
 pip install pygame tkinter
 ```
-2.Running the Application:
+3.Running the Application:
 
 To run the application, execute:
 
@@ -52,7 +52,7 @@ To run the application, execute:
 python GUI.py
 ```
 ### Usage
-
+In the application code change the algorithm that it uses and run the application.
 Upon launching, the application will prompt you to Select the number of queens on the Chess Boards. The visualization will start automatically and display each step the algorithm takes to solve the N-Queens problem.
 
 
