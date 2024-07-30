@@ -24,9 +24,43 @@ Heuristic Hill Climbing is an optimization technique which starts with an arbitr
 ### Prerequisites
 - Python 3.x
 - Pygame
+- Tkinter
 
 ### Installation
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/n-queens-visualization.git
+Navigate to the project directory:
+
+bash
+
+cd n-queens-visualization
+
+Install the required packages:
+
+```bash
+
+pip install pygame tkinter
+
+2.Running the Application:
+
+To run the application, execute:
+
+bash
+
+python main.py
+
+Replace main.py with the path to your script if different.
+Usage
+
+Upon launching, the application will prompt you to select an algorithm. The visualization will start automatically and display each step the algorithm takes to solve the N-Queens problem.
+Contributing
+
+Contributions to this project are welcome! Please fork the repository and submit a pull request with your features or fixes.
+License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+Acknowledgments
+
+    Thanks to all contributors who have helped in refining the algorithms and enhancing the application.
