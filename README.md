@@ -55,5 +55,3 @@ python GUI.py
 In the application code change the algorithm that it uses and run the application.
 Upon launching, the application will prompt you to Select the number of queens on the Chess Boards. The visualization will start automatically and display each step the algorithm takes to solve the N-Queens problem.
 
-
-    Thanks to all contributors who have helped in refining the algorithms and enhancing the application.
