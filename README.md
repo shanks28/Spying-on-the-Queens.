@@ -30,12 +30,12 @@ Heuristic Hill Climbing is an optimization technique which starts with an arbitr
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/n-queens-visualization.git
+   git clone https://github.com/shanks28/Spying-on-the-Queens..git
 Navigate to the project directory:
 
 ```bash
 
-cd n-queens-visualization
+cd Spying-on-the-Queens
 ```
 2.Install the required packages:
 
